@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="icon" href="https://i.pinimg.com/736x/04/77/ac/0477ac4a2f82d59fb0d6fd45416c8454.jpg" type="image/x-icon">
+    <title>MovieClick - TR </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Fredoka+One&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+   body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(to bottom, #000000, #434343);
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+  padding: 50px 0;
+}
+
+.header h1 {
+  font-size: 3em;
+  margin: 0;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.header p {
+  font-size: 1.2em;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.movie-poster {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.movie-poster img {
+  width: 100%;
+  max-width: 800px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  animation: zoomIn 2s ease-in-out;
+  display: block;
+  margin: 0 auto; /* Center the banner image */
+}
+
+.movie-details {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  animation: slideIn 2s ease-in-out;
+}
+
+.movie-details h2 {
+  margin-top: 0;
+}
+
+.season-buttons {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.season-buttons button {
+  background: #434343;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.season-buttons button:hover {
+  background: #000;
+  transform: scale(1.1);
+}
+
+.episode-buttons {
+  display: none;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.episode-buttons button {
+  background: #434343;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.episode-buttons button:hover {
+  background: #000;
+  transform: scale(1.1);
+}
+
+.episode-frame {
+  display: none;
+  text-align: center;
+  margin: 20px 0;
+  animation: fadeIn 2s ease-in-out;
+  margin: 0 auto; /* Center the iframe */
+  width: 80%; /* Set iframe width */
+}
+
+.episode-frame video {
+  width: 100%;
+  max-width: 800px;
+  height: 450px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.admin-panel {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.admin-panel input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+}
+
+.admin-panel button {
+  width: 100%;
+  padding: 10px;
+  background: #434343;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.admin-panel button:hover {
+  background: #000;
+}
+
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeOut 2s ease-in-out forwards;
+  animation-delay: 3s;
+}
+
+.loading-screen h1 {
+  font-family: 'Fredoka One', cursive;
+  font-size: 3em;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  animation: rainbow 2s infinite;
+  -webkit-text-stroke: 2px #000;
+}
+
+.loading-screen .version {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1em;
+  color: #fff;
+}
+
+.loading-screen .info {
+  font-size: 1em;
+  color: #fff;
+  margin-top: 20px;
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.5);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes rainbow {
+  0% {
+    color: red;
+  }
+
+  14% {
+    color: orange;
+  }
+
+  28% {
+    color: yellow;
+  }
+
+  42% {
+    color: green;
+  }
+
+  57% {
+    color: blue;
+  }
+
+  71% {
+    color: indigo;
+  }
+
+  85% {
+    color: violet;
+  }
+
+  100% {
+    color: red;
+  }
+}
+    </style>
+</head>
+<body>
+    <div class="loading-screen">
+        <h1>MovieClick</h1>
+        <div class="version">v.15</div>
+        <div class="info">MovieClick was originally created on 2024/2/17<br>All rights reserved</div>
+    </div>
+    <div class="container">
+        <div class="header">
+            <h1>The Rookie</h1>
+            <p>Welcome to the official website of the TV show "The Rookie".</p>
+        </div>
+        <div class="movie-poster">
+            <img id="poster" src="https://www.androidauthority.com/wp-content/uploads/2024/01/The-Rookie-season-6.jpg" alt="Banner of the TV show The Rookie featuring the main characters in police uniforms" />
+        </div>
+        <div class="movie-details">
+            <h2>About the Show</h2>
+            <p id="plot">"The Rookie" follows John Nolan, a man in his forties, who becomes the oldest rookie at the Los Angeles Police Department. The show is a mix of drama, action, and comedy, providing a unique perspective on the challenges faced by a rookie cop.</p>
+            <p><strong>Genre:</strong> <span id="genre"></span></p>
+            <p><strong>IMDB Rating:</strong> <span id="rating"></span></p>
+            <p><strong>Actors:</strong> <span id="actors"></span></p>
+            <p><strong>Cast:</strong> <span id="cast"></span></p>
+        </div>
+        <div class="season-buttons">
+            <button onclick="showEpisodes('season6')">Season 6</button>
+            <button onclick="showEpisodes('season7')">Season 7</button>
+        </div>
+        <div class="episode-buttons" id="season6">
+            <button onclick="showEpisode('e01')">E01</button>
+            <button onclick="showEpisode('e02')">E02</button>
+            <button onclick="showEpisode('e03')">E03</button>
+            <button onclick="showEpisode('e04')">E04</button>
+            <button onclick="showEpisode('e05')">E05</button>
+            <button onclick="showEpisode('e06')">E06</button>
+            <button onclick="showEpisode('e07')">E07</button>
+            <button onclick="showEpisode('e08')">E08</button>
+            <button onclick="showEpisode('e09')">E09</button>
+            <button onclick="showEpisode('e10')">E10</button>
+        </div>
+        <div class="episode-buttons" id="season7">
+            <button onclick="showWarning()">E01</button>
+            <button onclick="showWarning()">E02</button>
+            <button onclick="showWarning()">E03</button>
+            <button onclick="showWarning()">E04</button>
+            <button onclick="showWarning()">E05</button>
+            <button onclick="showWarning()">E06</button>
+            <button onclick="showWarning()">E07</button>
+            <button onclick="showWarning()">E08</button>
+            <button onclick="showWarning()">E09</button>
+            <button onclick="showWarning()">E10</button>
+            <button onclick="showWarning()">E11</button>
+            <button onclick="showWarning()">E12</button>
+            <button onclick="showWarning()">E13</button>
+            <button onclick="showWarning()">E14</button>
+            <button onclick="showWarning()">E15</button>
+            <button onclick="showWarning()">E16</button>
+            <button onclick="showWarning()">E17</button>
+            <button onclick="showWarning()">E18</button>
+        </div>
+        <div class="episode-frame" id="episodeFrame">
+            <video playsinline="" controls>
+                <source id="videoSource" src="" type="video/mp4" size="1080">
+                <source src="" type="video/mp4" size="480">
+                <source src="" type="video/mp4" size="720">
+            </video>
+        </div>
+    </div>
+    <div class="admin-panel" id="adminPanel">
+        <h2>Admin Panel</h2>
+        <input id="adminPassword" type="password" placeholder="Enter Admin Code">
+        <button onclick="checkPassword()">Submit</button>
+    </div>
+    <script>
+        document.addEventListener('keydown', function(event) {
+            if (event.shiftKey && event.key === '9') {
+                document.getElementById('adminPanel').style.display = 'block';
+            }
+        });
+
+        function checkPassword() {
+            var password = document.getElementById('adminPassword').value;
+            if (password === '123') {
+                alert('Access Granted');
+                // Add admin functionalities here
+            } else {
+                alert('Access Denied');
+            }
+        }
+
+        async function fetchMovieDetails() {
+            const response = await fetch('https://www.omdbapi.com/?t=The+Rookie&apikey=81d16daf');
+            const data = await response.json();
+            document.getElementById('plot').innerText = data.Plot;
+            document.getElementById('genre').innerText = data.Genre;
+            document.getElementById('rating').innerText = data.imdbRating;
+            document.getElementById('actors').innerText = data.Actors;
+            document.getElementById('cast').innerText = data.Actors;
+        }
+
+        function showEpisodes(season) {
+            document.getElementById('season6').style.display = 'none';
+            document.getElementById('season7').style.display = 'none';
+            document.getElementById(season).style.display = 'block';
+        }
+
+        function showEpisode(episode) {
+            document.getElementById('episodeFrame').style.display = 'block';
+            let videoSource = document.getElementById('videoSource');
+            if (episode === 'e01') {
+                videoSource.src = "https://files012.tusdrive.com/903b?download_token=adda70cc61131360789cb29f21b3bd88640015f832dea12d52ce11d6dc680950";
+            } else if (episode === 'e02') {
+                videoSource.src = "https://files012.tusdrive.com/9039?download_token=4b11c2d9acc8b8f44286a68557130ba46c1fb3b012175834cc9c0fa8cf43eea7";
+            } else if (episode === 'e03') {
+                videoSource.src = "https://files012.tusdrive.com/4O2s?download_token=74f26b11f38149abe7da195e784a83a3b2e94c41ab00f8819ebbe0ef806f0097";
+            } else if (episode === 'e04') {
+                videoSource.src = "https://files012.tusdrive.com/dcX1?download_token=6c311d256189c11a6cebdfe80078b79ca6cd00763b1955599765571870b3f668";
+            } else if (episode === 'e05') {
+                videoSource.src = "https://files014.tusdrive.com/91dP?download_token=31388bdb099709962c0f255841480470b79968cfd64651480900b51f4c435540";
+            } else if (episode === 'e06') {
+                videoSource.src = "https://files014.tusdrive.com/4Pt0?download_token=1b6e20302310137b58996cbc0cdc8118269e46bb71723b9e0aa341a4935f2803";
+            } else if (episode === 'e07') {
+                videoSource.src = "https://files012.tusdrive.com/91U4?download_token=3356ae0b11182d3deafaa16768bc422f3e773273ba4de6bdb97f5efcc3245871";
+            } else if (episode === 'e08') {
+                videoSource.src = "https://files012.tusdrive.com/hqdJ?download_token=26f5b184fb9c9cb9a258d2e47cac9121aee439b64145d5e643b8eb5047b9ce19";
+            } else if (episode === 'e09') {
+                videoSource.src = "https://files012.tusdrive.com/91Y6?download_token=3ba39639a144c228313ed74bd181d83081993db25a9628952929fe09d0ccb722";
+            } else if (episode === 'e10') {
+                videoSource.src = "https://files012.tusdrive.com/hqgS?download_token=5724ce6349caf90c2845642b6b7a2f639a5c5997fa3770d22cb74399e258a760";
+            }
+            videoSource.parentElement.load();
+        }
+
+        function showWarning() {
+            alert("Season 7 releases in 2025 near January 7.");
+        }
+
+        fetchMovieDetails();
+    </script>
+</body>
+</html>
